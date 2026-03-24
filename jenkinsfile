@@ -1,36 +1,32 @@
 pipeline {
-  agent any
-  
-  environment {
-    APP_NAME = 'my-app'
-  }
-  
-  stages {
-    stage('Build') {
-      steps {
-        echo 'Building the app...'
-      }
+    agent any
+    
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building the app...'
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                echo 'Deploying app...'
+            }
+        }
     }
     
-    stage('Test') {
-      steps {
-        echo 'Running tests...'
-      }
+    post {
+        success {
+            echo 'Pipeline succeeded!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
     }
-    
-    stage('Deploy') {
-      steps {
-        echo 'Deploying app...'
-      }
-    }
-  }
-  
-  post {
-    success {
-      echo 'Pipeline succeeded!'
-    }
-    failure {
-      echo 'Pipeline failed!'
-    }
-  }
 }
